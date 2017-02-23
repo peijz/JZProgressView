@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     progressView = [[JZProgressView alloc]initWithFrame:CGRectMake(40,80, 100, 100)];
+    progressView.layer.backgroundColor = [UIColor greenColor].CGColor;
     
     progressView.progressColor = [UIColor redColor];
     progressView.progressStrokeWidth = 5.f;

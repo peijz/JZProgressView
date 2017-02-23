@@ -43,14 +43,14 @@
     //创建背景图层
     backGroundLayer = [CAShapeLayer layer];
     backGroundLayer.fillColor = nil;
-    backGroundLayer.frame = self.bounds;
+    
     
     //创建填充图层
     frontFillLayer = [CAShapeLayer layer];
     frontFillLayer.fillColor = nil;
-    frontFillLayer.frame = self.bounds;
     
     
+
     [self.layer addSublayer:backGroundLayer];
     [self.layer addSublayer:frontFillLayer];
     
@@ -79,7 +79,7 @@
 {
     _progressTrackColor = progressTrackColor;
     backGroundLayer.strokeColor = progressTrackColor.CGColor;
-    backGroundBezierPath = [UIBezierPath bezierPathWithArcCenter:self.center radius:(CGRectGetWidth(self.bounds)-self.progressStrokeWidth)/2.f startAngle:0 endAngle:M_PI*2
+    backGroundBezierPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds)) radius:(CGRectGetWidth(self.bounds)-self.progressStrokeWidth)/2.f startAngle:0 endAngle:M_PI*2
                                                        clockwise:YES];
     backGroundLayer.path = backGroundBezierPath.CGPath;
 }
@@ -90,7 +90,7 @@
 - (void)setProgressValue:(CGFloat)progressValue
 {
     _progressValue = progressValue;
-    frontFillBezierPath = [UIBezierPath bezierPathWithArcCenter:self.center radius:(CGRectGetWidth(self.bounds)-self.progressStrokeWidth)/2.f startAngle:-M_PI_4 endAngle:(2*M_PI)*progressValue-M_PI_4 clockwise:YES];
+    frontFillBezierPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds)) radius:(CGRectGetWidth(self.bounds)-self.progressStrokeWidth)/2.f startAngle:-M_PI_4 endAngle:(2*M_PI)*progressValue-M_PI_4 clockwise:YES];
     frontFillLayer.path = frontFillBezierPath.CGPath;
 }
 - (CGFloat)progressValue
@@ -110,8 +110,9 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    
-    self.centerView.center = self.center;//CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+    backGroundLayer.frame = self.bounds;
+    frontFillLayer.frame = self.bounds;
+    self.centerView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
 }
 
 @end
