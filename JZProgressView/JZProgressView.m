@@ -42,7 +42,7 @@
 {
     //创建背景图层
     backGroundLayer = [CAShapeLayer layer];
-    backGroundLayer.fillColor = nil;
+    backGroundLayer.fillColor = [UIColor whiteColor].CGColor;
     
     
     //创建填充图层
